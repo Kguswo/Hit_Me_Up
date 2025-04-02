@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hit Me Up - GitHub README 방문자 카운터</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Hit Me Up</h1>
+        <p>GitHub README를 위한 간단한 방문자 카운터</p>
+    </header>
+
+    <main>
+        <section class="form-section">
+            <h2>방문자 카운터 배지 생성</h2>
+            <form th:action="@{/generate}" method="post" th:object="${badgeForm}">
+                <div class="form-group">
+                    <label for="url">추적할 URL:</label>
+                    <input type="text" id="url" th:field="*{url}" placeholder="https://github.com/yourusername"
+                           required>
+                </div>
+
+                <div class="form-options">
+                    <div class="form-group">
+                        <label for="title">배지 텍스트:</label>
+                        <input type="text" id="title" th:field="*{title}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="titleBg">제목 배경색:</label>
+                        <input type="color" id="titleBg" th:field="*{titleBg}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="countBg">카운트 배경색:</label>
+                        <input type="color" id="countBg" th:field="*{countBg}">
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="edgeFlat" th:field="*{edgeFlat}">
+                        <label for="edgeFlat">모서리 각지게</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn">배지 생성하기</button>
+            </form>
+        </section>
+
+        <section class="result-section" th:if="${showResult}">
+            <h2>생성된 배지</h2>
+
+            <div class="preview-box">
+                <h3>미리보기:</h3>
+                <img th:src="${badgeUrl}" alt="방문자 수 배지">
+            </div>
+
+            <div class="code-box">
+                <div class="code-section">
+                    <h3>마크다운 코드 (GitHub README용):</h3>
+                    <div class="code-container">
+                        <pre id="markdown-code" th:text="${markdownCode}"></pre>
+                        <button onclick="copyToClipboard('markdown-code')" class="copy-btn">복사</button>
+                    </div>
+                </div>
+
+                <div class="code-section">
+                    <h3>HTML 코드 (웹사이트용):</h3>
+                    <div class="code-container">
+                        <pre id="html-code" th:text="${htmlCode}"></pre>
+                        <button onclick="copyToClipboard('html-code')" class="copy-btn">복사</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>특징</h2>
+            <ul>
+                <li>간단한 설치 - 마크다운 코드 한 줄만 추가하세요</li>
+                <li>실시간 카운터 - 방문할 때마다 자동으로 증가</li>
+                <li>가볍고 빠른 로딩 - 페이지 성능에 영향을 주지 않습니다</li>
+                <li>무료 및 오픈 소스</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Hit Me Up. 모든 권리 보유.</p>
+    </footer>
+</div>
+
+<script>
+    function copyToClipboard(elementId) {
+        const element = document.getElementById(elementId);
+        const text = element.textContent;
+
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                alert('클립보드에 복사되었습니다!');
+            })
+            .catch(err => {
+                alert('복사 실패: ' + err);
+            });
+    }
+</script>
+</body>
+</html>
