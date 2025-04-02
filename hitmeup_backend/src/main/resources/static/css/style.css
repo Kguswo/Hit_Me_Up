@@ -1,0 +1,217 @@
+/* 기본 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 헤더 */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #3c9e00;
+}
+
+header p {
+    font-size: 1.2rem;
+    color: #6c757d;
+}
+
+/* 섹션 */
+section {
+    margin-bottom: 40px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #343a40;
+}
+
+h3 {
+    margin-bottom: 15px;
+    color: #495057;
+}
+
+/* 폼 스타일 */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+input[type="color"] {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox input {
+    margin-right: 8px;
+}
+
+.checkbox label {
+    margin-bottom: 0;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #3c9e00;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #308c00;
+}
+
+/* 결과 섹션 */
+.result-section {
+    margin-top: 30px;
+}
+
+.preview-box {
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.code-box {
+    margin-bottom: 20px;
+}
+
+.code-section {
+    margin-bottom: 20px;
+}
+
+.code-container {
+    position: relative;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    padding: 15px;
+    border: 1px solid #dee2e6;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    padding-right: 40px;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.copy-btn:hover {
+    background-color: #5a6268;
+}
+
+/* 특징 리스트 */
+.features ul {
+    list-style-type: none;
+}
+
+.features li {
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
+}
+
+.features li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #3c9e00;
+    font-weight: bold;
+}
+
+/* 푸터 */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+    color: #6c757d;
+    border-top: 1px solid #e9ecef;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .form-options {
+        grid-template-columns: 1fr;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
