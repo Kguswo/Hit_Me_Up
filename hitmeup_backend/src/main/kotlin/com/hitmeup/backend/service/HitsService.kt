@@ -1,9 +1,11 @@
 package com.hitmeup.backend.service
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Service
 
 @Service
+@ConditionalOnProperty(name = ["spring.data.redis.enabled"], havingValue = "true", matchIfMissing = false)
 class HitsService(private val redisTemplate: RedisTemplate<String, Long>) {
 
     // URL에 대한 방문자 수 증가

@@ -16,52 +16,93 @@
     <main>
         <section class="form-section">
             <h2>방문자 카운터 배지 생성</h2>
-            <form th:action="@{/generate}" method="post" th:object="${badgeForm}">
+            <form id="badgeForm" action="javascript:void(0);">
                 <div class="form-group">
                     <label for="url">추적할 URL:</label>
-                    <input type="text" id="url" th:field="*{url}" placeholder="https://github.com/yourusername"
+                    <input type="text" id="url" name="url" placeholder="https://github.com/yourusername"
                            required>
                 </div>
 
                 <div class="form-options">
                     <div class="form-group">
                         <label for="title">배지 텍스트:</label>
-                        <input type="text" id="title" th:field="*{title}">
+                        <input type="text" id="title" name="title" value="hits">
                     </div>
 
                     <div class="form-group">
                         <label for="titleBg">제목 배경색:</label>
-                        <input type="color" id="titleBg" th:field="*{titleBg}">
+                        <input type="color" id="titleBg" name="titleBg" value="#555555">
                     </div>
 
                     <div class="form-group">
                         <label for="countBg">카운트 배경색:</label>
-                        <input type="color" id="countBg" th:field="*{countBg}">
+                        <input type="color" id="countBg" name="countBg" value="#79C83D">
                     </div>
 
                     <div class="form-group checkbox">
-                        <input type="checkbox" id="edgeFlat" th:field="*{edgeFlat}">
+                        <input type="checkbox" id="edgeFlat" name="edgeFlat">
                         <label for="edgeFlat">모서리 각지게</label>
                     </div>
                 </div>
 
-                <button type="submit" class="btn">배지 생성하기</button>
+                <button type="submit" class="btn" id="generateButton">배지 생성하기</button>
+                <div class="loading-spinner" id="loadingSpinner" style="display: none;">처리 중...</div>
             </form>
+
+            <!-- JavaScript가 비활성화된 경우를 위한 대체 폼 -->
+            <noscript>
+                <hr class="form-divider">
+                <section class="form-section noscript-section">
+                    <h2>방문자 카운터 배지 생성 (JavaScript 비활성화됨)</h2>
+                    <form th:action="@{/view}" method="post">
+                        <div class="form-group">
+                            <label for="url-noscript">추적할 URL:</label>
+                            <input type="text" id="url-noscript" name="url"
+                                   placeholder="https://github.com/yourusername"
+                                   required>
+                        </div>
+
+                        <div class="form-options">
+                            <div class="form-group">
+                                <label for="title-noscript">배지 텍스트:</label>
+                                <input type="text" id="title-noscript" name="title" value="hits">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="titleBg-noscript">제목 배경색:</label>
+                                <input type="color" id="titleBg-noscript" name="titleBg" value="#555555">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="countBg-noscript">카운트 배경색:</label>
+                                <input type="color" id="countBg-noscript" name="countBg" value="#79C83D">
+                            </div>
+
+                            <div class="form-group checkbox">
+                                <input type="checkbox" id="edgeFlat-noscript" name="edgeFlat">
+                                <label for="edgeFlat-noscript">모서리 각지게</label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn">배지 생성하기</button>
+                    </form>
+                </section>
+            </noscript>
         </section>
 
-        <section class="result-section" th:if="${showResult}">
+        <section class="result-section" id="resultSection" style="display: none;">
             <h2>생성된 배지</h2>
 
             <div class="preview-box">
                 <h3>미리보기:</h3>
-                <img th:src="${badgeUrl}" alt="방문자 수 배지">
+                <img id="badgePreview" src="" alt="방문자 수 배지">
             </div>
 
             <div class="code-box">
                 <div class="code-section">
                     <h3>마크다운 코드 (GitHub README용):</h3>
                     <div class="code-container">
-                        <pre id="markdown-code" th:text="${markdownCode}"></pre>
+                        <pre id="markdown-code"></pre>
                         <button onclick="copyToClipboard('markdown-code')" class="copy-btn">복사</button>
                     </div>
                 </div>
@@ -69,7 +110,7 @@
                 <div class="code-section">
                     <h3>HTML 코드 (웹사이트용):</h3>
                     <div class="code-container">
-                        <pre id="html-code" th:text="${htmlCode}"></pre>
+                        <pre id="html-code"></pre>
                         <button onclick="copyToClipboard('html-code')" class="copy-btn">복사</button>
                     </div>
                 </div>
@@ -93,6 +134,63 @@
 </div>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const badgeForm = document.getElementById('badgeForm');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const resultSection = document.getElementById('resultSection');
+        const badgePreview = document.getElementById('badgePreview');
+        const markdownCode = document.getElementById('markdown-code');
+        const htmlCode = document.getElementById('html-code');
+
+        badgeForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // 로딩 상태 표시
+            loadingSpinner.style.display = 'block';
+
+            // 폼 데이터 수집
+            const formData = {
+                url: document.getElementById('url').value,
+                title: document.getElementById('title').value,
+                titleBg: document.getElementById('titleBg').value,
+                countBg: document.getElementById('countBg').value,
+                edgeFlat: document.getElementById('edgeFlat').checked
+            };
+
+            // API 호출 - 여기서 엔드포인트를 '/api/badge'로 변경
+            fetch('/api/badge', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // 로딩 상태 숨김
+                    loadingSpinner.style.display = 'none';
+
+                    // 결과 섹션 표시
+                    resultSection.style.display = 'block';
+
+                    // 배지 이미지 업데이트
+                    badgePreview.src = data.data.badgeUrl;
+
+                    // 코드 업데이트
+                    markdownCode.textContent = data.data.markdownCode;
+                    htmlCode.textContent = data.data.htmlCode;
+
+                    // 결과 섹션으로 부드럽게 스크롤
+                    resultSection.scrollIntoView({behavior: 'smooth'});
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    loadingSpinner.style.display = 'none';
+                    alert('배지 생성 중 오류가 발생했습니다. 다시 시도해 주세요.');
+                });
+        });
+    });
+
     function copyToClipboard(elementId) {
         const element = document.getElementById(elementId);
         const text = element.textContent;
