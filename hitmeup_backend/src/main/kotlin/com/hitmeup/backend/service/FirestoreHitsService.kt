@@ -6,6 +6,7 @@ import com.google.firebase.cloud.FirestoreClient
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.*
 import java.util.concurrent.ExecutionException
 
 @Service
@@ -21,9 +22,43 @@ class FirestoreHitsService(@Autowired private val firebaseApp: FirebaseApp) {
         logger.info("Firestore 인스턴스 생성 성공")
     }
 
+    // URL 안전한 ID로 변환
+    fun getDocumentIdFromUrl(url: String): String? {
+        // Base64인코딩
+        return Base64.getEncoder().encodeToString(url.toByteArray())
+            .replace("/", "_")
+            .replace("+", "-")
+            .replace("=", "")
+    }
+
+    // URL DB에 존재하는지 확인, 없으면 추가
+    fun ensureUrlExists(url: String) {
+        val docId = getDocumentIdFromUrl(url)!!
+        val documentRef = firestore.collection(collection).document(docId)
+
+        try {
+            val document = documentRef.get().get()
+            if (!document.exists()) {
+                documentRef.set(
+                    mapOf(
+                        "url" to url,
+                        "count" to 0L,
+                        "lastUpdated" to com.google.cloud.Timestamp.now(),
+                    )
+                ).get()
+                logger.info("URL '$url'에 대한 새 문서 초기값 0으로 생성")
+            } else {
+                logger.info("URL '$url'에 대한 문서 이미 존재함")
+            }
+        } catch (e: Exception) {
+            logger.error("URL 확인 중 오류 발생: ${e.message}", e)
+        }
+    }
+
     // URL에 대한 방문자 수 증가
     fun incrementHits(url: String): Long {
-        val documentRef = firestore.collection(collection).document(url)
+        val docId = getDocumentIdFromUrl(url)!!
+        val documentRef = firestore.collection(collection).document(docId)
 
         try {
             // 트랜잭션 내에서 카운터 증가
@@ -63,7 +98,8 @@ class FirestoreHitsService(@Autowired private val firebaseApp: FirebaseApp) {
 
     // URL에 대한 현재 방문자 수 조회
     fun getHits(url: String): Long {
-        val documentRef = firestore.collection(collection).document(url)
+        val docId = getDocumentIdFromUrl(url)!!
+        val documentRef = firestore.collection(collection).document(docId)
 
         try {
             val document = documentRef.get().get()
