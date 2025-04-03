@@ -1,6 +1,6 @@
 package com.hitmeup.backend.controller
 
-import com.hitmeup.backend.service.HitsService
+import com.hitmeup.backend.service.FirestoreHitsService
 import com.hitmeup.backend.util.SvgGenerator
 import io.mockk.*
 import org.junit.jupiter.api.AfterEach
@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 class HitsControllerTest {
 
     private lateinit var mockMvc: MockMvc
-    private lateinit var hitsService: HitsService
+    private lateinit var hitsService: FirestoreHitsService
     private lateinit var hitsController: HitsController
 
     @BeforeEach

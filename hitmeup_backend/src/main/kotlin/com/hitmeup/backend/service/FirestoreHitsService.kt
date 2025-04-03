@@ -12,12 +12,12 @@ import java.util.concurrent.ExecutionException
 class FirestoreHitsService(@Autowired private val firebaseApp: FirebaseApp) {
 
     private val logger = LoggerFactory.getLogger(FirestoreHitsService::class.java)
-    private val firestore: Firestore
+    private val firestore: Firestore = FirestoreClient.getFirestore(firebaseApp)
     private val collection = "hits"
 
     init {
         logger.info("FirestoreHitsService 초기화 중...")
-        firestore = FirestoreClient.getFirestore(firebaseApp)
+//        firestore = FirestoreClient.getFirestore(firebaseApp)
         logger.info("Firestore 인스턴스 생성 성공")
     }
 
