@@ -1,15 +1,15 @@
 package com.hitmeup.backend.config
 
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
+//import org.springframework.context.annotation.Bean
+//import org.springframework.context.annotation.Configuration
 import org.springframework.data.redis.connection.RedisConnectionFactory
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.data.redis.serializer.StringRedisSerializer
 
-@Configuration
+//@Configuration
 class RedisConfig {
 
-    @Bean
+    //    @Bean
     fun redisTemplate(connectionFactory: RedisConnectionFactory): RedisTemplate<String, Long> {
         val template = RedisTemplate<String, Long>()
         template.setConnectionFactory(connectionFactory)
