@@ -1,7 +1,7 @@
 steps:
-  # Docker 빌드 단계
+  # Docker 빌드 단계 - 수정된 부분
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/hitmeup:$COMMIT_SHA', '-f', 'hitmeup_backend/Dockerfile', './hitmeup_backend' ]
+    args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/hitmeup:$COMMIT_SHA', '.' ]
 
   # Docker 이미지 푸시 단계
   - name: 'gcr.io/cloud-builders/docker'

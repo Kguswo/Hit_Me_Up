@@ -3,11 +3,11 @@ FROM eclipse-temurin:21-jdk as builder
 WORKDIR /app
 
 # Gradle 파일 복사 (캐시 최적화)
-COPY gradlew .
-COPY gradle gradle
-COPY build.gradle.kts .
-COPY settings.gradle.kts .
-COPY src src
+COPY hitmeup_backend/gradlew .
+COPY hitmeup_backend/gradle gradle
+COPY hitmeup_backend/build.gradle.kts .
+COPY hitmeup_backend/settings.gradle.kts .
+COPY hitmeup_backend/src src
 
 # 의존성 다운로드 (캐시 레이어 분리)
 RUN ./gradlew dependencies --no-daemon
