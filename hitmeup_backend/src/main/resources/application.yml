@@ -19,7 +19,7 @@ server:
     context-path: /
 
 app:
-  domain: http://localhost:8080
+  domain: ${APP_DOMAIN:http://localhost:8080}
   visitor:
     default-count: 0
 

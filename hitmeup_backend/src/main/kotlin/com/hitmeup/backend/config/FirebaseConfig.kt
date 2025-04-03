@@ -7,7 +7,10 @@ import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.ClassPathResource
+import java.io.ByteArrayInputStream
 import java.io.IOException
+import java.util.*
+
 
 @Configuration
 class FirebaseConfig {
@@ -25,17 +28,26 @@ class FirebaseConfig {
             }
 
             logger.info("Firebase 앱 초기화 시도 중...")
-            val resource = ClassPathResource("firebase-service-account.json")
-            if (!resource.exists()) {
-                logger.error("Firebase 서비스 계정 파일을 찾을 수 없습니다: firebase-service-account.json")
-                throw IOException("Firebase 서비스 계정 파일을 찾을 수 없습니다.")
+
+            // 환경 변수에서 Firebase 설정 가져오기 시도
+            val firebaseConfigEnv = System.getenv("FIREBASE_CONFIG")
+            val credentials: GoogleCredentials = if (firebaseConfigEnv != null) {
+                logger.info("환경 변수에서 Firebase 설정을 로드합니다.")
+                val decoded = Base64.getDecoder().decode(firebaseConfigEnv)
+                GoogleCredentials.fromStream(ByteArrayInputStream(decoded))
+            } else {
+                // 로컬 파일에서 로드 (개발 환경용)
+                logger.info("로컬 파일에서 Firebase 설정을 로드합니다.")
+                val resource = ClassPathResource("firebase-service-account.json")
+                if (!resource.exists()) {
+                    logger.error("Firebase 서비스 계정 파일을 찾을 수 없습니다: firebase-service-account.json")
+                    throw IOException("Firebase 서비스 계정 파일을 찾을 수 없습니다.")
+                }
+                GoogleCredentials.fromStream(resource.inputStream)
             }
 
-            logger.info("Firebase 서비스 계정 파일을 찾았습니다.")
-            val serviceAccount = resource.inputStream
-
             val options = FirebaseOptions.builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                .setCredentials(credentials)
                 .build()
 
             val app = FirebaseApp.initializeApp(options)
