@@ -22,5 +22,9 @@ WORKDIR /app
 # 빌드 결과물만 복사 (수정된 부분)
 COPY --from=builder /app/build/libs/hitmeup_backend-0.0.1-SNAPSHOT.jar app.jar
 
+# 환경 변수 및 포트 설정
+ENV PORT=8080
+EXPOSE 8080
+
 # 4단계: 실행 명령
 ENTRYPOINT ["java", "-jar", "app.jar"]

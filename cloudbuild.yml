@@ -18,6 +18,8 @@ steps:
       - '--region=asia-northeast3'
       - '--platform=managed'
       - '--allow-unauthenticated'
+      - '--set-env-vars=SPRING_PROFILES_ACTIVE=prod'
+      - '--timeout=180s'  # 시작 타임아웃 늘리기
 
 images:
   - 'gcr.io/$PROJECT_ID/hitmeup:$COMMIT_SHA'
