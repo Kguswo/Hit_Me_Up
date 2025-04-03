@@ -11,6 +11,7 @@ class WebConfig {
 
     @Bean
     fun corsFilter(): CorsFilter {
+
         val source = UrlBasedCorsConfigurationSource()
         val config = CorsConfiguration()
 
