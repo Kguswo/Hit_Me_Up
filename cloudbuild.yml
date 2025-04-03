@@ -1,0 +1,23 @@
+steps:
+  # Docker 빌드 단계
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/hitmeup:$COMMIT_SHA', '-f', 'hitmeup_backend/Dockerfile', './hitmeup_backend' ]
+
+  # Docker 이미지 푸시 단계
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'push', 'gcr.io/$PROJECT_ID/hitmeup:$COMMIT_SHA' ]
+
+  # Cloud Run 배포 단계
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'hitmeup'
+      - '--image=gcr.io/$PROJECT_ID/hitmeup:$COMMIT_SHA'
+      - '--region=asia-northeast3'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+
+images:
+  - 'gcr.io/$PROJECT_ID/hitmeup:$COMMIT_SHA'
