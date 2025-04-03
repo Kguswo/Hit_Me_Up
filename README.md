@@ -2,4 +2,4 @@
 
 Create a badge that counts visitors to a specific URL. Generate the badge and add it to your README to track visitor counts.
 
-![image](https://github.com/user-attachments/assets/4d302974-d987-4c6f-acfe-20498398f3a9)
+![image](https://github.com/user-attachments/assets/4983cf9c-b11e-43dd-8dfc-ffcc6f34233a)
