@@ -1,16 +1,16 @@
 spring:
   application:
     name: Hit Me Up
-  
-  # Redis
-  data:
-    redis:
-      host: localhost
-      port: 6379
-      # password: "" // .env
-      # database: 0
-      repositories:
-        enabled: true
+
+#  # Redis
+#  data:
+#    redis:
+#      host: localhost
+#      port: 6379
+#      # password: "" // .env
+#      # database: 0
+#      repositories:
+#        enabled: true
 
 # ??
 server:
