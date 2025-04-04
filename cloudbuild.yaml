@@ -19,6 +19,7 @@ steps:
       - '--platform=managed'
       - '--allow-unauthenticated'
       - '--set-env-vars=SPRING_PROFILES_ACTIVE=prod'
+      - '--set-secrets=/app/src/main/resources/firebase-service-account.json=firebase-service-account:latest'
       - '--timeout=180s'  # 시작 타임아웃 늘리기
 
 images:
