@@ -20,6 +20,19 @@ class FirebaseConfig {
     @Throws(IOException::class)
     fun firebaseApp(): FirebaseApp {
         try {
+            // 시스템 환경 변수 로깅
+            logger.info("시스템 환경 변수 목록:")
+            System.getenv().forEach { (key, value) ->
+                if (!key.contains("secret", ignoreCase = true) &&
+                    !key.contains("password", ignoreCase = true) &&
+                    !key.contains("firebase", ignoreCase = true)
+                ) {
+                    logger.info("$key = $value")
+                } else {
+                    logger.info("$key = [보안 값]")
+                }
+            }
+
             // 이미 초기화된 앱 있는지 체크
             val existingApps = FirebaseApp.getApps()
             if (existingApps.isNotEmpty()) {
@@ -31,20 +44,44 @@ class FirebaseConfig {
 
             // 환경 변수에서 Firebase 설정 가져오기 시도
             val firebaseConfigEnv = System.getenv("FIREBASE_CONFIG")
-            val credentials: GoogleCredentials = if (firebaseConfigEnv != null) {
-                logger.info("환경 변수에서 Firebase 설정을 로드합니다.")
-                GoogleCredentials.fromStream(ByteArrayInputStream(firebaseConfigEnv.toByteArray()))
-            } else {
-                // 로컬 파일에서 로드 (개발 환경용)
-                logger.info("로컬 파일에서 Firebase 설정을 로드합니다.")
-                val resource = ClassPathResource("firebase-service-account.json")
-                if (!resource.exists()) {
-                    logger.error("Firebase 서비스 계정 파일을 찾을 수 없습니다: firebase-service-account.json")
-                    throw IOException("Firebase 서비스 계정 파일을 찾을 수 없습니다.")
+
+            if (firebaseConfigEnv != null) {
+                logger.info("FIREBASE_CONFIG 환경 변수가 존재합니다.")
+                try {
+                    // 환경 변수의 내용이 유효한 JSON인지 간단히 확인
+                    if (firebaseConfigEnv.trim().startsWith("{") && firebaseConfigEnv.trim().endsWith("}")) {
+                        logger.info("Firebase 구성이 JSON 형식으로 보입니다.")
+                    } else {
+                        logger.warn("Firebase 구성이 JSON 형식이 아닐 수 있습니다.")
+                    }
+
+                    val credentials =
+                        GoogleCredentials.fromStream(ByteArrayInputStream(firebaseConfigEnv.toByteArray()))
+                    val options = FirebaseOptions.builder()
+                        .setCredentials(credentials)
+                        .build()
+
+                    val app = FirebaseApp.initializeApp(options)
+                    logger.info("Firebase 앱 초기화 성공: ${app.name}")
+                    return app
+                } catch (e: Exception) {
+                    logger.error("환경 변수에서 Firebase 초기화 실패: ${e.message}", e)
+                    // 환경 변수 방식이 실패하면 파일 방식으로 폴백
+                    logger.info("파일 방식으로 초기화 시도")
                 }
-                GoogleCredentials.fromStream(resource.inputStream)
+            } else {
+                logger.warn("FIREBASE_CONFIG 환경 변수가 없습니다.")
             }
 
+            // 로컬 파일에서 로드 (개발 환경용)
+            logger.info("로컬 파일에서 Firebase 설정을 로드합니다.")
+            val resource = ClassPathResource("firebase-service-account.json")
+            if (!resource.exists()) {
+                logger.error("Firebase 서비스 계정 파일을 찾을 수 없습니다: firebase-service-account.json")
+                throw IOException("Firebase 서비스 계정 파일을 찾을 수 없습니다.")
+            }
+
+            val credentials = GoogleCredentials.fromStream(resource.inputStream)
             val options = FirebaseOptions.builder()
                 .setCredentials(credentials)
                 .build()
