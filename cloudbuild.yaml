@@ -15,7 +15,7 @@ steps:
       - 'deploy'
       - 'hitmeup-backend'
       - '--image=gcr.io/hit-me-up-336ec/hitmeup:latest'
-      - '--region=asia-northeast3'
+      - '--region=asia-northeast1'
       - '--platform=managed'
       - '--allow-unauthenticated'
       - '--set-env-vars=SPRING_PROFILES_ACTIVE=prod'
