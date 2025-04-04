@@ -19,7 +19,7 @@ steps:
       - '--platform=managed'
       - '--allow-unauthenticated'
       - '--set-env-vars=SPRING_PROFILES_ACTIVE=prod'
-      - '--set-env-vars=APP_DOMAIN=https://hitmeup-backend-593087166771.asia-northeast3.run.app'
+      - '--set-env-vars=APP_DOMAIN=https://hitmeup-backend-593087166771.asia-northeast1.run.app'
       - '--set-secrets=FIREBASE_CONFIG=firebase-service-account:latest'
       - '--timeout=180s'
 
