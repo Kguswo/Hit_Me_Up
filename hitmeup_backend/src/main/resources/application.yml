@@ -19,7 +19,7 @@ server:
     context-path: /
 
 app:
-  domain: ${APP_DOMAIN:http://localhost:8080}
+  domain: ${APP_DOMAIN:https://localhost:8080}  # http 대신 https 사용
   visitor:
     default-count: 0
 

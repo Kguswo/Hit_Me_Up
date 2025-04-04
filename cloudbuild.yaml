@@ -1,11 +1,11 @@
 steps:
-  # Docker 빌드 단계 - 수정된 부분
+  # Docker 빌드 단계
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/hitmeup:$COMMIT_SHA', '.' ]
+    args: [ 'build', '-t', 'gcr.io/hit-me-up-336ec/hitmeup:latest', '.' ]
 
   # Docker 이미지 푸시 단계
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'push', 'gcr.io/$PROJECT_ID/hitmeup:$COMMIT_SHA' ]
+    args: [ 'push', 'gcr.io/hit-me-up-336ec/hitmeup:latest' ]
 
   # Cloud Run 배포 단계
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -14,13 +14,14 @@ steps:
       - 'run'
       - 'deploy'
       - 'hitmeup-backend'
-      - '--image=gcr.io/$PROJECT_ID/hitmeup:$COMMIT_SHA'
+      - '--image=gcr.io/hit-me-up-336ec/hitmeup:latest'
       - '--region=asia-northeast3'
       - '--platform=managed'
       - '--allow-unauthenticated'
       - '--set-env-vars=SPRING_PROFILES_ACTIVE=prod'
+      - '--set-env-vars=APP_DOMAIN=https://hitmeup-backend-593087166771.asia-northeast3.run.app'
       - '--set-secrets=FIREBASE_CONFIG=firebase-service-account:latest'
-      - '--timeout=180s'  # 시작 타임아웃 늘리기
+      - '--timeout=180s'
 
 images:
-  - 'gcr.io/$PROJECT_ID/hitmeup:$COMMIT_SHA'
+  - 'gcr.io/hit-me-up-336ec/hitmeup:latest'
