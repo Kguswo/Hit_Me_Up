@@ -33,8 +33,7 @@ class FirebaseConfig {
             val firebaseConfigEnv = System.getenv("FIREBASE_CONFIG")
             val credentials: GoogleCredentials = if (firebaseConfigEnv != null) {
                 logger.info("환경 변수에서 Firebase 설정을 로드합니다.")
-                val decoded = Base64.getDecoder().decode(firebaseConfigEnv)
-                GoogleCredentials.fromStream(ByteArrayInputStream(decoded))
+                GoogleCredentials.fromStream(ByteArrayInputStream(firebaseConfigEnv.toByteArray()))
             } else {
                 // 로컬 파일에서 로드 (개발 환경용)
                 logger.info("로컬 파일에서 Firebase 설정을 로드합니다.")
