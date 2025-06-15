@@ -25,8 +25,9 @@ COPY --from=builder /app/build/libs/hitmeup_backend-0.0.1-SNAPSHOT.jar app.jar
 # 환경 변수 및 포트 설정
 ENV PORT=8080
 ENV SPRING_PROFILES_ACTIVE=prod
+
 # 디버깅을 위한 추가 환경 변수
-ENV JAVA_TOOL_OPTIONS="-XX:+PrintCommandLineFlags -verbose:class"
+# ENV JAVA_TOOL_OPTIONS="-XX:+PrintCommandLineFlags -verbose:class"
 
 EXPOSE 8080
 
