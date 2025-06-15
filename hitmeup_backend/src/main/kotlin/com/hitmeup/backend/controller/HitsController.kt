@@ -15,6 +15,9 @@ import java.nio.charset.StandardCharsets
 class HitsController(private val hitsService: FirestoreHitsService) {
     private val logger = LoggerFactory.getLogger(HitsController::class.java)
 
+    /**
+     * 실제 배지 생성 + 카운트 증가
+     */
     @GetMapping("/count/increment", produces = ["image/svg+xml"])
     fun getBadge(
         @RequestParam("url") encodedUrl: String,
@@ -45,7 +48,9 @@ class HitsController(private val hitsService: FirestoreHitsService) {
             .body(svg)
     }
 
-    // 미리보기 (항상 1)
+    /**
+     * 미리보기 (항상 1)
+     */
     @GetMapping("/count/preview", produces = ["image/svg+xml"])
     fun getPreviewBadge(
         @RequestParam("url") encodedUrl: String,
@@ -68,6 +73,9 @@ class HitsController(private val hitsService: FirestoreHitsService) {
             .body(svg)
     }
 
+    /**
+     * 현재 카운트 조회
+     */
     @GetMapping("/count")
     fun getCount(@RequestParam("url") encodedUrl: String): ResponseEntity<ApiResponse<CountResponse>> {
         val url = URLDecoder.decode(encodedUrl, StandardCharsets.UTF_8)
