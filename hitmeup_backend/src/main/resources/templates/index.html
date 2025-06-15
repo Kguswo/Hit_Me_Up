@@ -188,10 +188,10 @@
 
                     // 결과 섹션 표시
                     resultSection.style.display = 'block';
-
+                    console.log('Badge URL received:', data.data.badgeUrl);
                     // 배지 이미지 업데이트
                     badgePreview.src = data.data.badgeUrl;
-
+                    console.log('Image src set to:', badgePreview.src);
                     // 코드 업데이트
                     markdownCode.textContent = data.data.markdownCode;
                     htmlCode.textContent = data.data.htmlCode;
