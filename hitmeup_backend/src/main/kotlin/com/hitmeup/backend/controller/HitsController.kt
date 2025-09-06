@@ -70,29 +70,28 @@ class HitsController(private val hitsService: FirestoreHitsService) {
             }
 
             val measurementId = "G-WLP9FYY9ER"
+            // Validation 엔드포인트 사용
             val analyticsUrl = "https://www.google-analytics.com/mp/collect?measurement_id=$measurementId&api_secret=$apiSecret"
 
             val payload = mapOf(
-                "client_id" to "server_${System.currentTimeMillis()}",
+                "client_id" to "server_backend_001",
                 "events" to listOf(
                     mapOf(
-                        "name" to "badge_viewed",
-                        "parameters" to mapOf(
-                            "source" to "server"
-                        )
+                        "name" to "server_hit",
+//                        "parameters" to emptyMap<String, Any>()
                     )
                 )
             )
 
-            // HttpHeaders 명시적 설정
             val headers = HttpHeaders()
             headers.contentType = MediaType.APPLICATION_JSON
 
             val entity = HttpEntity(payload, headers)
 
-            restTemplate.postForEntity(analyticsUrl, entity, String::class.java)
+            val response = restTemplate.postForEntity(analyticsUrl, entity, String::class.java)
+            logger.info("Validation 응답: {} - Body: {}", response.statusCode, response.body)
         } catch (e: Exception) {
-            // 에러 무시
+            logger.error("Analytics 전송 실패", e)
         }
     }
 
