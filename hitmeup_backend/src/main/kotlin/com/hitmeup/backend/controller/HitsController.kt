@@ -81,7 +81,13 @@ class HitsController(private val hitsService: FirestoreHitsService) {
                 )
             )
 
-            restTemplate.postForEntity(analyticsUrl, payload, String::class.java)
+            // HttpHeaders 명시적 설정
+            val headers = org.springframework.http.HttpHeaders()
+            headers.contentType = org.springframework.http.MediaType.APPLICATION_JSON
+
+            val entity = org.springframework.http.HttpEntity(payload, headers)
+
+            restTemplate.postForEntity(analyticsUrl, entity, String::class.java)
         } catch (e: Exception) {
             // 에러 무시
         }
