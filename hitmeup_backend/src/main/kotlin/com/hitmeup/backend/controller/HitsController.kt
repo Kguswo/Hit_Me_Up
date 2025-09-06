@@ -16,6 +16,12 @@ class HitsController(private val hitsService: FirestoreHitsService) {
     private val logger = LoggerFactory.getLogger(HitsController::class.java)
 
     /**
+     * 워밍업용 핑 엔드포인트
+     */
+    @GetMapping("/ping")
+    fun ping(): String = "pong"
+
+    /**
      * 실제 배지 생성 + 카운트 증가
      */
     @GetMapping("/count/increment", produces = ["image/svg+xml"])
