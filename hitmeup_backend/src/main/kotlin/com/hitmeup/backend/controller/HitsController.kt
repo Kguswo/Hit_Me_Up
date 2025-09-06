@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.client.RestTemplate
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpHeaders
+import org.springframework.http.MediaType
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
 
@@ -82,10 +85,10 @@ class HitsController(private val hitsService: FirestoreHitsService) {
             )
 
             // HttpHeaders 명시적 설정
-            val headers = org.springframework.http.HttpHeaders()
-            headers.contentType = org.springframework.http.MediaType.APPLICATION_JSON
+            val headers = HttpHeaders()
+            headers.contentType = MediaType.APPLICATION_JSON
 
-            val entity = org.springframework.http.HttpEntity(payload, headers)
+            val entity = HttpEntity(payload, headers)
 
             restTemplate.postForEntity(analyticsUrl, entity, String::class.java)
         } catch (e: Exception) {
