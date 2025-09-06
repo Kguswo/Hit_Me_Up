@@ -7,6 +7,7 @@ import com.hitmeup.backend.util.toSuccessResponse
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.client.RestTemplate
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
 
@@ -14,6 +15,8 @@ import java.nio.charset.StandardCharsets
 @RequestMapping("/api")
 class HitsController(private val hitsService: FirestoreHitsService) {
     private val logger = LoggerFactory.getLogger(HitsController::class.java)
+    private val restTemplate = RestTemplate()
+    private val apiSecret = System.getenv("FIREBASE_ANALYTICS_SECRET")
 
     /**
      * 워밍업용 핑 엔드포인트
@@ -39,7 +42,9 @@ class HitsController(private val hitsService: FirestoreHitsService) {
         val count = if (preview) {
             hitsService.getHits(url)
         } else {
-            hitsService.incrementHits(url)
+            hitsService.incrementHits(url).also {
+                sendBadgeViewAnalytics()
+            }
         }
         // # 접두사 확인 및 추가
         val formattedTitleBg = if (titleBg.startsWith("#")) titleBg else "#$titleBg"
@@ -52,6 +57,34 @@ class HitsController(private val hitsService: FirestoreHitsService) {
             .header("Pragma", "no-cache")
             .header("Expires", "0")
             .body(svg)
+    }
+
+    private fun sendBadgeViewAnalytics() {
+        try {
+            if (apiSecret.isNullOrBlank()) {
+                logger.warn("Firebase Analytics API Secret이 설정되지 않음")
+                return
+            }
+
+            val measurementId = "G-WLP9FYY9ER"
+            val analyticsUrl = "https://www.google-analytics.com/mp/collect?measurement_id=$measurementId&api_secret=$apiSecret"
+
+            val payload = mapOf(
+                "client_id" to "server_${System.currentTimeMillis()}",
+                "events" to listOf(
+                    mapOf(
+                        "name" to "badge_viewed",
+                        "parameters" to mapOf(
+                            "source" to "server"
+                        )
+                    )
+                )
+            )
+
+            restTemplate.postForEntity(analyticsUrl, payload, String::class.java)
+        } catch (e: Exception) {
+            // 에러 무시
+        }
     }
 
     /**
