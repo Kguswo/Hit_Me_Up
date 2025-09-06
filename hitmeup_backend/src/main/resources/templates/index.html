@@ -173,6 +173,11 @@
                 edgeFlat: document.getElementById('edgeFlat').checked
             };
 
+            // Analytics 이벤트 - 카운터 생성 시도
+            if (window.trackCounterGeneration) {
+                window.trackCounterGeneration(formData.url);
+            }
+
             // API 호출 - 여기서 엔드포인트를 '/api/badge'로 변경
             fetch('/api/badge', {
                 method: 'POST',
@@ -196,6 +201,11 @@
                     markdownCode.textContent = data.data.markdownCode;
                     htmlCode.textContent = data.data.htmlCode;
 
+                    // Analytics 이벤트 - 배지 생성 성공
+                    if (window.trackBadgeGenerated) {
+                        window.trackBadgeGenerated(formData.url);
+                    }
+
                     // 결과 섹션으로 부드럽게 스크롤
                     resultSection.scrollIntoView({behavior: 'smooth'});
                 })
@@ -203,6 +213,11 @@
                     console.error('Error:', error);
                     loadingSpinner.style.display = 'none';
                     alert('배지 생성 중 오류가 발생했습니다. 다시 시도해 주세요.');
+
+                    // Analytics 이벤트 - 에러 발생
+                    if (window.trackError) {
+                        window.trackError('badge_generation_failed', error.message);
+                    }
                 });
         });
     });
@@ -210,6 +225,11 @@
     function copyToClipboard(elementId) {
         const element = document.getElementById(elementId);
         const text = element.textContent;
+
+        // Analytics 이벤트 - 복사 버튼 클릭
+        if (window.trackCopy) {
+            window.trackCopy(elementId);
+        }
 
         navigator.clipboard.writeText(text)
             .then(() => {
@@ -219,6 +239,65 @@
                 alert('복사 실패: ' + err);
             });
     }
+</script>
+
+<!-- Firebase Analytics -->
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyA0OuHPwA2bxNPJ9VCmp-sWl-IYDJik_78",
+        authDomain: "hit-me-up-336ec.firebaseapp.com",
+        projectId: "hit-me-up-336ec",
+        storageBucket: "hit-me-up-336ec.firebasestorage.app",
+        messagingSenderId: "593087166771",
+        appId: "1:593087166771:web:b28585eac140d91d46e646",
+        measurementId: "G-WLP9FYY9ER"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    // 커스텀 이벤트 함수들
+    window.trackCounterGeneration = function(url) {
+        logEvent(analytics, 'counter_generation_started', {
+            target_url: url,
+            timestamp: new Date().toISOString()
+        });
+    };
+
+    window.trackBadgeGenerated = function(url) {
+        logEvent(analytics, 'badge_generated_success', {
+            target_url: url,
+            timestamp: new Date().toISOString()
+        });
+    };
+
+    window.trackCopy = function(type) {
+        logEvent(analytics, 'code_copied', {
+            code_type: type, // 'markdown-code' or 'html-code'
+            timestamp: new Date().toISOString()
+        });
+    };
+
+    window.trackError = function(errorType, errorMessage) {
+        logEvent(analytics, 'error_occurred', {
+            error_type: errorType,
+            error_message: errorMessage,
+            timestamp: new Date().toISOString()
+        });
+    };
+
+    // 페이지 로드 이벤트
+    logEvent(analytics, 'page_view', {
+        page_title: document.title,
+        page_location: window.location.href,
+        timestamp: new Date().toISOString()
+    });
 </script>
 </body>
 </html>
