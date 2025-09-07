@@ -2,22 +2,29 @@ name: Keep Cloud Run Warm
 
 on:
   schedule:
-    # 매 10분마다 실행 (UTC 기준)
-    - cron: '*/10 * * * *'
-  
-  # 수동 실행도 가능하게
+    - cron: '*/5 * * * *'
+    - cron: '2-59/5 * * * *'
   workflow_dispatch:
 
 jobs:
   warm-service:
     runs-on: ubuntu-latest
+    timeout-minutes: 3
     
     steps:
-      - name: Warm up Cloud Run service
+      - name: Primary ping
+        id: primary
         run: |
-          echo "Warming up the service..."
-          curl -f -s -o /dev/null "https://hitmeup-backend-593087166771.asia-northeast1.run.app/api/ping" || echo "Warming request failed, but that's ok"
-          echo "Warming completed"
-        
-      - name: Log warming time
-        run: echo "Service warmed at $(date)"
+          if curl -f -s -o /dev/null --max-time 20 \
+            "https://hitmeup-backend-593087166771.asia-northeast1.run.app/api/ping"; then
+            echo "success=true" >> $GITHUB_OUTPUT
+          else
+            echo "success=false" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Backup ping
+        if: steps.primary.outputs.success != 'true'
+        run: |
+          sleep 30
+          curl -f -s -o /dev/null --max-time 20 \
+            "https://hitmeup-backend-593087166771.asia-northeast1.run.app/api/ping"
