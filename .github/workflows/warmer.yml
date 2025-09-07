@@ -1,0 +1,30 @@
+name: Keep Cloud Run Warm
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+    - cron: '2-59/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  warm-service:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    
+    steps:
+      - name: Primary ping
+        id: primary
+        run: |
+          if curl -f -s -o /dev/null --max-time 20 \
+            "https://hitmeup-backend-593087166771.asia-northeast1.run.app/api/ping"; then
+            echo "success=true" >> $GITHUB_OUTPUT
+          else
+            echo "success=false" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Backup ping
+        if: steps.primary.outputs.success != 'true'
+        run: |
+          sleep 30
+          curl -f -s -o /dev/null --max-time 20 \
+            "https://hitmeup-backend-593087166771.asia-northeast1.run.app/api/ping"
