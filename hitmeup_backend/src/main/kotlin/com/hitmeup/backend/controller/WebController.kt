@@ -26,12 +26,12 @@ class WebController(private val hitsService: FirestoreHitsService) {
     @ResponseBody
     fun generateBadge(@RequestBody badgeForm: BadgeForm): ResponseEntity<ApiResponse<BadgeInfo>> {
         val encodedUrl = java.net.URLEncoder.encode(badgeForm.url, java.nio.charset.StandardCharsets.UTF_8)
-
+        val encodedTitle = java.net.URLEncoder.encode(badgeForm.title, java.nio.charset.StandardCharsets.UTF_8)
         // 배지 생성시 db에 등록
         hitsService.ensureUrlExists(badgeForm.url)
 
         val markdownCode = """
-            [![Hits](${domain}/api/count/increment?url=${encodedUrl}&title=${badgeForm.title}&title_bg=${
+            [![Hits](${domain}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
             badgeForm.titleBg.removePrefix(
                 "#"
             )
@@ -40,15 +40,15 @@ class WebController(private val hitsService: FirestoreHitsService) {
 
         val htmlCode = """
             <a href="${domain}">
-              <img src="${domain}/api/count/increment?url=${encodedUrl}&title=${badgeForm.title}&title_bg=${
+              <img src="${domain}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
             badgeForm.titleBg.removePrefix(
                 "#"
             )
-        }&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat}" alt="${badgeForm.title}" />
+        }&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat}" alt="${encodedTitle}" />
             </a>
         """.trimIndent()
 
-        val badgeUrl = "${domain}/api/count/preview?url=${encodedUrl}&title=${badgeForm.title}&title_bg=${
+        val badgeUrl = "${domain}/api/count/preview?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
             badgeForm.titleBg.removePrefix("#")
         }&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat}"
 
@@ -65,12 +65,13 @@ class WebController(private val hitsService: FirestoreHitsService) {
     @PostMapping("/view")
     fun generateView(@ModelAttribute badgeForm: BadgeForm, model: Model): String {
         val encodedUrl = java.net.URLEncoder.encode(badgeForm.url, java.nio.charset.StandardCharsets.UTF_8)
+        val encodedTitle = java.net.URLEncoder.encode(badgeForm.title, java.nio.charset.StandardCharsets.UTF_8) // 추가
 
         // 배지 생성시 db에 등록
         hitsService.ensureUrlExists(badgeForm.url)
         
         val markdownCode = """
-            [![Hits](${domain}/api/count/increment?url=${encodedUrl}&title=${badgeForm.title}&title_bg=${
+            [![Hits](${domain}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
             badgeForm.titleBg.removePrefix(
                 "#"
             )
@@ -79,15 +80,15 @@ class WebController(private val hitsService: FirestoreHitsService) {
 
         val htmlCode = """
             <a href="${domain}">
-              <img src="${domain}/api/count/increment?url=${encodedUrl}&title=${badgeForm.title}&title_bg=${
+              <img src="${domain}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
             badgeForm.titleBg.removePrefix(
                 "#"
             )
-        }&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat}" alt="${badgeForm.title}" />
+        }&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat}" alt="${encodedTitle}" />
             </a>
         """.trimIndent()
 
-        val badgeUrl = "${domain}/api/count/preview?url=${encodedUrl}&title=${badgeForm.title}&title_bg=${
+        val badgeUrl = "${domain}/api/count/preview?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
             badgeForm.titleBg.removePrefix("#")
         }&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat}"
 
