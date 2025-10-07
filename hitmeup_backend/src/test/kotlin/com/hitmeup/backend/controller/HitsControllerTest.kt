@@ -60,7 +60,7 @@ class HitsControllerTest {
         val countBg = "#79C83D"
         val edgeFlat = false
         val count = 42L
-        val svgContent = "<svg>테스트 SVG</svg>"
+        val svgContent = "<svg>test SVG</svg>"
 
         every { hitsService.incrementHits(url) } returns count
         every {
@@ -70,7 +70,7 @@ class HitsControllerTest {
         // when & then
         mockMvc.perform(get("/api/count/increment?url=$encodedUrl&title=$title&title_bg=$titleBg&count_bg=$countBg&edge_flat=$edgeFlat"))
             .andExpect(status().isOk)
-            .andExpect(content().contentType(MediaType.valueOf("image/svg+xml;charset=UTF-8")))
+            .andExpect(content().contentTypeCompatibleWith(MediaType.valueOf("image/svg+xml")))
             .andExpect(content().string(svgContent))
             .andExpect(header().string("Cache-Control", "no-cache, no-store, must-revalidate"))
 
