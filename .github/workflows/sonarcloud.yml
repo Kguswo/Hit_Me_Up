@@ -24,7 +24,9 @@ jobs:
 
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@v1
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          organization: hit-me-up
-          projectKey: Kguswo_Hit_Me_Up
-          token: ${{ secrets.SONAR_TOKEN }}
+          args: >
+            -Dsonar.organization=hit-me-up
+            -Dsonar.projectKey=Kguswo_Hit_Me_Up
