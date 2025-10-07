@@ -106,10 +106,10 @@ This project is licensed under the [MIT License](https://github.com/Kguswo/Hit_M
 
 <a href="https://github.com/Kguswo" target="_blank" rel="noopener" style="text-decoration:none;">
   <img src="https://img.shields.io/badge/GitHub-Kguswo-181717?style=for-the-badge&logo=github&logoColor=white" alt="Kguswo GitHub" />
-</a>
+</a>&nbsp
 <a href="https://kguswo.github.io/posts/README.md-%EB%B0%A9%EB%AC%B8%EC%9E%90-%EC%88%98-%EC%B9%B4%EC%9A%B4%ED%8A%B8-%EC%84%9C%EB%B9%84%EC%8A%A4/" target="_blank" rel="noopener" style="text-decoration:none; margin-left: 10px;">
   <img src="https://img.shields.io/badge/✍️_Article-Hit Me Up-FF5722?style=for-the-badge&logoColor=white" alt="Kguswo Blog" />
-</a>
+</a>&nbsp
 <a href="https://www.linkedin.com/in/hyeon-jae-kim-64b417299" target="_blank" rel="noopener" style="text-decoration:none; margin-left: 10px;">
   <img src="https://img.shields.io/badge/LinkedIn-HyeonJae_Kim-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn HyeonJae Kim" />
 </a>
