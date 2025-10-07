@@ -3,7 +3,7 @@ plugins {
     kotlin("plugin.spring") version "1.9.25"
     id("org.springframework.boot") version "3.4.4"
     id("io.spring.dependency-management") version "1.1.7"
-    id("org.sonarqube") version "5.1.0.4882"
+//    id("org.sonarqube") version "5.1.0.4882"
 }
 
 group = "com.hitmeup"
@@ -49,10 +49,10 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-sonar {
-    properties {
-        property("sonar.projectKey", "Kguswo_Hit_Me_Up")
-        property("sonar.organization", "hit-me-up")
-        property("sonar.host.url", "https://sonarcloud.io")
-    }
-}
+//sonar {
+//    properties {
+//        property("sonar.projectKey", "Kguswo_Hit_Me_Up")
+//        property("sonar.organization", "hit-me-up")
+//        property("sonar.host.url", "https://sonarcloud.io")
+//    }
+//}
