@@ -23,7 +23,7 @@ jobs:
           java-version: 17
 
       - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@v1.9.0
+        uses: sonarsource/sonarcloud-github-action@v1
         with:
           organization: hit-me-up
           projectKey: Kguswo_Hit_Me_Up
