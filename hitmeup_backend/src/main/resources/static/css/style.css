@@ -83,6 +83,8 @@ section {
 h2 {
     margin-bottom: 20px;
     color: #343a40;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 h3 {
@@ -105,7 +107,8 @@ h3 {
 label {
     display: block;
     margin-bottom: 5px;
-    font-weight: 600;
+    font-size: 1.05rem;
+    font-weight: 750;
 }
 
 input[type="text"] {
@@ -127,14 +130,20 @@ input[type="color"] {
 .checkbox {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+    min-height: 40px;
+    padding-top: 25px;
+    margin-top: 5px;
+    margin-left: 20px;
 }
 
 .checkbox input {
-    margin-right: 8px;
+    margin-right: 0;
 }
 
 .checkbox label {
     margin-bottom: 0;
+    margin-left: 8px;
 }
 
 .btn {
@@ -150,8 +159,17 @@ input[type="color"] {
     transition: background-color 0.3s;
 }
 
+.btn-center {
+    display: block;
+    margin: 0 auto;
+}
+
 .btn:hover {
     background-color: #308c00;
+}
+
+#generateButton {
+    margin-top: 30px;
 }
 
 /* 결과 섹션 */
@@ -180,7 +198,9 @@ input[type="color"] {
     background-color: #f8f9fa;
     border-radius: 4px;
     padding: 15px;
+    padding-right: 80px;
     border: 1px solid #dee2e6;
+    min-height: 60px;
 }
 
 pre {
@@ -192,12 +212,12 @@ pre {
 
 .copy-btn {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 15px;
+    right: 15px;
     background-color: #6c757d;
     color: white;
     border: none;
-    padding: 6px 12px;
+    padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.8rem;
@@ -216,6 +236,7 @@ pre {
     margin-bottom: 10px;
     padding-left: 25px;
     position: relative;
+    font-weight: 500;
 }
 
 .features li:before {
