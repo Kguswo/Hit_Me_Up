@@ -166,6 +166,20 @@
         const notionUrl = document.getElementById('notion-url');
         const htmlCode = document.getElementById('html-code');
 
+        const urlInput = document.getElementById('url');
+
+        urlInput.addEventListener('blur', function (e) {
+            e.target.value = e.target.value.trim().replace(/\s/g, '%20');
+        });
+
+        urlInput.addEventListener('invalid', function (e) {
+            e.target.setCustomValidity('Please enter a URL');
+        });
+
+        urlInput.addEventListener('input', function (e) {
+            e.target.setCustomValidity('');
+        });
+
         badgeForm.addEventListener('submit', function (event) {
             event.preventDefault();
 
