@@ -14,9 +14,9 @@
             <h1>Hit Me Up</h1>
             <p>README, 노션, 웹사이트 어디서든 손쉽게 방문자 수를 표시해보세요</p>
             <div class="header-badge">
-                <a href="https://hitmeup-backend-593087166771.asia-northeast1.run.app">
+                <a href="https://hit-me-up-336ec.web.app/">
                     <img src="https://hitmeup-backend-593087166771.asia-northeast1.run.app/api/count/increment?url=https%3A%2F%2Fhit-me-up-336ec.web.app%2F&title=hits&title_bg=555555&count_bg=79c83d&edge_flat=false"
-                        alt="hits"/>
+                         alt="hits"/>
                 </a>
             </div>
         </div>
@@ -66,7 +66,7 @@
                         <div class="form-group">
                             <label for="url-noscript">TARGET URL</label>
                             <input type="text" id="url-noscript" name="url"
-                                placeholder="https://github.com/yourusername" required>
+                                   placeholder="https://github.com/yourusername" required>
                         </div>
 
                         <div class="form-options">
@@ -149,7 +149,7 @@
             <a href="https://github.com/Kguswo/Hit_Me_Up" target="_blank" rel="noopener noreferrer" class="github-icon">
                 <svg height="24" width="24" viewBox="0 0 16 16" version="1.1">
                     <path fill-rule="evenodd"
-                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
                 </svg>
             </a>
         </div>
@@ -267,8 +267,8 @@
 <!-- Firebase Analytics -->
 <script type="module">
     // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-    import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+    import {initializeApp} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import {getAnalytics, logEvent} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
 
     // Your web app's Firebase configuration
     const firebaseConfig = {
@@ -286,28 +286,28 @@
     const analytics = getAnalytics(app);
 
     // 커스텀 이벤트 함수들
-    window.trackCounterGeneration = function(url) {
+    window.trackCounterGeneration = function (url) {
         logEvent(analytics, 'counter_generation_started', {
             target_url: url,
             timestamp: new Date().toISOString()
         });
     };
 
-    window.trackBadgeGenerated = function(url) {
+    window.trackBadgeGenerated = function (url) {
         logEvent(analytics, 'badge_generated_success', {
             target_url: url,
             timestamp: new Date().toISOString()
         });
     };
 
-    window.trackCopy = function(type) {
+    window.trackCopy = function (type) {
         logEvent(analytics, 'code_copied', {
             code_type: type, // 'markdown-code' or 'html-code'
             timestamp: new Date().toISOString()
         });
     };
 
-    window.trackError = function(errorType, errorMessage) {
+    window.trackError = function (errorType, errorMessage) {
         logEvent(analytics, 'error_occurred', {
             error_type: errorType,
             error_message: errorMessage,

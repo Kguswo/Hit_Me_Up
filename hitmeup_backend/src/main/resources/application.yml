@@ -20,6 +20,7 @@ server:
 
 app:
   domain: ${APP_DOMAIN:https://localhost:8080}  # http 대신 https 사용
+  frontend-url: ${FRONTEND_URL:https://hit-me-up-336ec.web.app}
   visitor:
     default-count: 0
 

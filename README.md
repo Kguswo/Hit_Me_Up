@@ -10,12 +10,13 @@ Generate a badge and add just one line of code to automatically track visitor co
 
 ![GitHub stars](https://img.shields.io/github/stars/Kguswo/Hit_Me_Up?style=social) ![GitHub watchers](https://img.shields.io/github/watchers/Kguswo/Hit_Me_Up?style=social) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/Kguswo/Hit_Me_Up)](https://github.com/Kguswo/Hit_Me_Up/releases) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Kguswo_Hit_Me_Up&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Kguswo_Hit_Me_Up) [![License](https://img.shields.io/github/license/Kguswo/Hit_Me_Up?color=yellow)](https://github.com/Kguswo/Hit_Me_Up/blob/develop/LICENSE)
 
-[![Hit Me Up Visitor Count Badge Example](https://hitmeup-backend-593087166771.asia-northeast1.run.app/api/count/increment?url=https%3A%2F%2Fgithub.com%2FKguswo%2FHit_Me_Up&title=Hit%20Me%20Up&title_bg=555555&count_bg=79c83d&edge_flat=false)](https://hitmeup-backend-593087166771.asia-northeast1.run.app)
+[![Hit Me Up Visitor Count Badge Example](https://hitmeup-backend-593087166771.asia-northeast1.run.app/api/count/increment?url=https%3A%2F%2Fgithub.com%2FKguswo%2FHit_Me_Up&title=Hit%20Me%20Up&title_bg=555555&count_bg=79c83d&edge_flat=false)](https://hit-me-up-336ec.web.app/)
 <br/>
 
 ## 🌟 Project Overview
 
-**Hit Me Up** is a simple and lightweight visitor counter service that tracks visitor counts in real-time for specific URLs and displays them as SVG badges.
+**Hit Me Up** is a simple and lightweight visitor counter service that tracks visitor counts in real-time for specific
+URLs and displays them as SVG badges.
 
 Add just one line of code to easily display visitor counts anywhere - GitHub README, Notion, blogs, and more.
 
@@ -88,7 +89,7 @@ The visitor count will automatically increment with each new visit.
 All forms of contributions are welcome! Issues and PRs are always open.  
 Join our growing open source community. Emails are also welcome.
 
-Email: nowalex322@gmail.com 
+Email: nowalex322@gmail.com
 
 Thank you!
 
