@@ -1,5 +1,9 @@
 # Hit Me Up 
 
+<img width="1029" height="395" alt="Hit Me Up 로고" src="https://github.com/user-attachments/assets/b443766b-bb22-4240-8325-29b6dcf34dc5" />
+
+<br/><br/>
+
 원하는 URL의 방문자 카운터를 쉽고 빠르게 만들어보세요!
 
 뱃지를 생성하고 단 한 줄 코드를 추가하면 자동으로 방문자 수를 추적할 수 있어요.
@@ -18,11 +22,8 @@
 <br/>
 
 <p align="center">
-    <a href="https://hit-me-up-336ec.web.app/" style="text-decoration:none;">
-        <span style="background-color:#72ba2a; color:white; padding:8px 12px; border-radius:5px; font-weight:bold;">
-        🚀  Hit Me Up 바로가기
-        </span>
-    </a>
+    <a href="https://hit-me-up-336ec.web.app/">
+        <img src="https://img.shields.io/badge/🎯_Hit_Me_Up_바로가기-72ba2a?style=for-the-badge" alt="Try Now"/>
 </p>
 
 <br/>
@@ -101,16 +102,13 @@ Email: nowalex322@gmail.com
 
 ## 🙋‍♂️ 소셜
 
-<p align="center">
+<div align="center">
 
-<a href="https://github.com/Kguswo" target="_blank" rel="noopener" style="text-decoration:none;">
-  <img src="https://img.shields.io/badge/GitHub-Kguswo-181717?style=for-the-badge&logo=github&logoColor=white" alt="Kguswo GitHub" />
-</a>&nbsp
-<a href="https://kguswo.github.io/posts/README.md-%EB%B0%A9%EB%AC%B8%EC%9E%90-%EC%88%98-%EC%B9%B4%EC%9A%B4%ED%8A%B8-%EC%84%9C%EB%B9%84%EC%8A%A4/" target="_blank" rel="noopener" style="text-decoration:none; margin-left: 10px;">
-  <img src="https://img.shields.io/badge/✍️_Article-Hit Me Up-FF5722?style=for-the-badge&logoColor=white" alt="Kguswo Blog" />
-</a>&nbsp
-<a href="https://www.linkedin.com/in/hyeon-jae-kim-64b417299" target="_blank" rel="noopener" style="text-decoration:none; margin-left: 10px;">
-  <img src="https://img.shields.io/badge/LinkedIn-HyeonJae_Kim-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn HyeonJae Kim" />
-</a>
-</p>
+[![GitHub](https://img.shields.io/badge/GitHub-Kguswo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Kguswo)
+&nbsp;&nbsp;&nbsp;
+[![Article](https://img.shields.io/badge/✍️_Article-Hit_Me_Up-FF5722?style=for-the-badge&logoColor=white)](https://kguswo.github.io/posts/README.md-%EB%B0%A9%EB%AC%B8%EC%9E%90-%EC%88%98-%EC%B9%B4%EC%9A%B4%ED%8A%B8-%EC%84%9C%EB%B9%84%EC%8A%A4/)
+&nbsp;&nbsp;&nbsp;
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-HyeonJae_Kim-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hyeon-jae-kim-64b417299)
+
+</div>
 
