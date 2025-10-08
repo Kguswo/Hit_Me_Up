@@ -62,11 +62,11 @@ Add just one line of code to easily display visitor counts anywhere - GitHub REA
 
 3. Click the `GENERATE BADGE` button
 
-    <img width="1634" height="878" alt="Generating Badge" src="https://github.com/user-attachments/assets/9b7c2bc3-439c-4f77-b74c-d4a428297ade" />
+    <img width="1137" height="531" alt="image" src="https://github.com/user-attachments/assets/22a2c31d-9c49-496c-b40d-7d1966cc3bd2" />
 
 4. Insert the generated code into your GitHub README, Notion, website, or anywhere you want
 
-    <img width="1646" height="1812" alt="Code View" src="https://github.com/user-attachments/assets/e389b3a0-40b8-45cd-8426-2785c80bc1f3" />
+    <img width="1151" height="994" alt="image" src="https://github.com/user-attachments/assets/1acedca7-a7c5-4352-9f98-f418f8eef88b" />
 
 The visitor count will automatically increment with each new visit.
 

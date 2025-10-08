@@ -61,11 +61,11 @@
 
 3. `GENERATE BADGE` 버튼 클릭
 
-    <img width="1634" height="878" alt="Generating Badge" src="https://github.com/user-attachments/assets/9b7c2bc3-439c-4f77-b74c-d4a428297ade" />
+    <img width="1137" height="531" alt="image" src="https://github.com/user-attachments/assets/22a2c31d-9c49-496c-b40d-7d1966cc3bd2" />
 
 4. 생성된 코드를 자신의 GitHub README, Notion, 웹 사이트 등 원하는 곳에 삽입
 
-    <img width="1646" height="1812" alt="Code View" src="https://github.com/user-attachments/assets/e389b3a0-40b8-45cd-8426-2785c80bc1f3" />
+    <img width="1151" height="994" alt="image" src="https://github.com/user-attachments/assets/1acedca7-a7c5-4352-9f98-f418f8eef88b" />
 
 새로운 방문이 생길 때마다 방문자 수가 자동으로 증가합니다.
 
