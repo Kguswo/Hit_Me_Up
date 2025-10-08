@@ -3,6 +3,7 @@ plugins {
     kotlin("plugin.spring") version "1.9.25"
     id("org.springframework.boot") version "3.4.4"
     id("io.spring.dependency-management") version "1.1.7"
+//    id("org.sonarqube") version "5.1.0.4882"
 }
 
 group = "com.hitmeup"
@@ -31,6 +32,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("io.mockk:mockk:${mockkVersion}")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
     // firebase
     implementation("com.google.firebase:firebase-admin:9.2.0")
      
@@ -46,3 +48,11 @@ kotlin {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+//sonar {
+//    properties {
+//        property("sonar.projectKey", "Kguswo_Hit_Me_Up")
+//        property("sonar.organization", "hit-me-up")
+//        property("sonar.host.url", "https://sonarcloud.io")
+//    }
+//}

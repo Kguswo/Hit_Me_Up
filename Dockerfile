@@ -3,11 +3,11 @@ FROM eclipse-temurin:21-jdk as builder
 WORKDIR /app
 
 # Gradle 파일 복사 (캐시 최적화)
-COPY hitmeup_backend/gradlew /app/
-COPY hitmeup_backend/gradle /app/gradle
-COPY hitmeup_backend/build.gradle.kts /app/
-COPY hitmeup_backend/settings.gradle.kts /app/
-COPY hitmeup_backend/src /app/src
+COPY hitmeup/gradlew /app/
+COPY hitmeup/gradle /app/gradle
+COPY hitmeup/build.gradle.kts /app/
+COPY hitmeup/settings.gradle.kts /app/
+COPY hitmeup/src /app/src
 
 # 권한 설정
 RUN chmod +x /app/gradlew
@@ -20,7 +20,7 @@ FROM eclipse-temurin:21-jdk
 WORKDIR /app
 
 # 빌드 결과물만 복사
-COPY --from=builder /app/build/libs/hitmeup_backend-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=builder /app/build/libs/hitmeup-0.0.1-SNAPSHOT.jar app.jar
 
 # 환경 변수 및 포트 설정
 ENV PORT=8080
