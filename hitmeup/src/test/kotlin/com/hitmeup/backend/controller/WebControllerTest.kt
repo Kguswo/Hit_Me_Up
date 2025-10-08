@@ -23,7 +23,10 @@ class WebControllerTest {
     fun setUp() {
         hitsService = mockk(relaxed = true)
         webController = WebController(hitsService)
+
         ReflectionTestUtils.setField(webController, "domain", "http://localhost:8080")
+        ReflectionTestUtils.setField(webController, "frontendUrl", "http://localhost:8080")
+
         mockMvc = MockMvcBuilders.standaloneSetup(webController).build()
 
         every { hitsService.ensureUrlExists(any()) } returns Unit

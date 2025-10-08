@@ -10,7 +10,7 @@
 
 ![GitHub stars](https://img.shields.io/github/stars/Kguswo/Hit_Me_Up?style=social) ![GitHub watchers](https://img.shields.io/github/watchers/Kguswo/Hit_Me_Up?style=social) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/Kguswo/Hit_Me_Up)](https://github.com/Kguswo/Hit_Me_Up/releases) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Kguswo_Hit_Me_Up&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Kguswo_Hit_Me_Up) [![License](https://img.shields.io/github/license/Kguswo/Hit_Me_Up?color=yellow)](https://github.com/Kguswo/Hit_Me_Up/blob/develop/LICENSE)
 
-[![Hit Me Up 방문자 수 뱃지 예시](https://hitmeup-backend-593087166771.asia-northeast1.run.app/api/count/increment?url=https%3A%2F%2Fgithub.com%2FKguswo%2FHit_Me_Up&title=Hit%20Me%20Up&title_bg=555555&count_bg=79c83d&edge_flat=false)](https://hit-me-up-336ec.web.app/)
+[![Hit Me Up 방문자 수 뱃지 예시](https://hit-me-up-336ec.web.app/api/count/increment?url=https%3A%2F%2Fgithub.com%2FKguswo%2FHit_Me_Up&title=Hit%20Me%20Up&title_bg=555555&count_bg=79c83d&edge_flat=false)](https://hit-me-up-336ec.web.app/)
 <br/>
 
 ## 🌟 프로젝트 소개

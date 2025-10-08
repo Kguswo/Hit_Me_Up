@@ -218,4 +218,13 @@ gradle-app.setting
 ### secret-key
 firebase-service-account.json
 
+### firebase
+.firebaserc
+.firebase/
+firebase.json
+public/
+
+###
+.gitignore
+
 # End of https://www.toptal.com/developers/gitignore/api/java,kotlin,intellij,macos,gradle

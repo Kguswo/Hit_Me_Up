@@ -38,7 +38,7 @@ class WebController(private val hitsService: FirestoreHitsService) {
 		hitsService.ensureUrlExists(badgeForm.url)
 
 		val markdownCode = """
-            [![Hits](${domain}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
+            [![Hits](${frontendUrl}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
 			badgeForm.titleBg.removePrefix(
 				"#"
 			)
@@ -47,7 +47,7 @@ class WebController(private val hitsService: FirestoreHitsService) {
 
 		val htmlCode = """
             <a href="${frontendUrl}">
-              <img src="${domain}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
+              <img src="${frontendUrl}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
 			badgeForm.titleBg.removePrefix(
 				"#"
 			)
@@ -55,7 +55,7 @@ class WebController(private val hitsService: FirestoreHitsService) {
             </a>
         """.trimIndent()
 
-		val badgeUrl = "${domain}/api/count/preview?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
+		val badgeUrl = "${frontendUrl}/api/count/preview?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
 			badgeForm.titleBg.removePrefix("#")
 		}&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat}"
 
@@ -78,7 +78,7 @@ class WebController(private val hitsService: FirestoreHitsService) {
 		hitsService.ensureUrlExists(badgeForm.url)
 
 		val markdownCode = """
-            [![Hits](${domain}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
+            [![Hits](${frontendUrl}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
 			badgeForm.titleBg.removePrefix(
 				"#"
 			)
@@ -87,7 +87,7 @@ class WebController(private val hitsService: FirestoreHitsService) {
 
 		val htmlCode = """
             <a href="${frontendUrl}">
-              <img src="${domain}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
+              <img src="${frontendUrl}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
 			badgeForm.titleBg.removePrefix(
 				"#"
 			)
@@ -95,7 +95,7 @@ class WebController(private val hitsService: FirestoreHitsService) {
             </a>
         """.trimIndent()
 
-		val badgeUrl = "${domain}/api/count/preview?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
+		val badgeUrl = "${frontendUrl}/api/count/preview?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
 			badgeForm.titleBg.removePrefix("#")
 		}&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat}"
 
