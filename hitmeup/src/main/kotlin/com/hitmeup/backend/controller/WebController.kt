@@ -65,7 +65,7 @@ class WebController(private val hitsService: FirestoreHitsService) {
 	@PostMapping("/view")
 	fun generateView(@ModelAttribute badgeForm: BadgeForm, model: Model): String {
 		val encodedUrl = java.net.URLEncoder.encode(badgeForm.url, java.nio.charset.StandardCharsets.UTF_8)
-		val encodedTitle = java.net.URLEncoder.encode(badgeForm.title, java.nio.charset.StandardCharsets.UTF_8) // 추가
+		val encodedTitle = java.net.URLEncoder.encode(badgeForm.title, java.nio.charset.StandardCharsets.UTF_8)
 
 		// 배지 생성시 db에 등록
 		hitsService.ensureUrlExists(badgeForm.url)
