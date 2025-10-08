@@ -55,7 +55,7 @@ class WebController(private val hitsService: FirestoreHitsService) {
             </a>
         """.trimIndent()
 
-		val badgeUrl = "${frontendUrl}/api/count/preview?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
+		val badgeUrl = "${frontendUrl}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
 			badgeForm.titleBg.removePrefix("#")
 		}&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat}"
 
@@ -95,7 +95,7 @@ class WebController(private val hitsService: FirestoreHitsService) {
             </a>
         """.trimIndent()
 
-		val badgeUrl = "${frontendUrl}/api/count/preview?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
+		val badgeUrl = "${frontendUrl}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
 			badgeForm.titleBg.removePrefix("#")
 		}&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat}"
 
