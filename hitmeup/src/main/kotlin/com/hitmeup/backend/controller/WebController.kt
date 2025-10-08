@@ -37,30 +37,23 @@ class WebController(private val hitsService: FirestoreHitsService) {
 		// 배지 생성시 db에 등록
 		hitsService.ensureUrlExists(badgeForm.url)
 
+		val badgeUrl = "${frontendUrl}/api/count/preview?url=${encodedUrl}&title=${encodedTitle}&title_bg=${badgeForm.titleBg.removePrefix("#")}&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat}"
+
+		val notionUrl = "${frontendUrl}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${badgeForm.titleBg.removePrefix("#")}&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat}"
+
 		val markdownCode = """
-            [![Hits](${frontendUrl}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
-			badgeForm.titleBg.removePrefix(
-				"#"
-			)
-		}&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat})](${frontendUrl})
-        """.trimIndent()
+			[![Hits]($notionUrl)](${frontendUrl})
+		""".trimIndent()
 
 		val htmlCode = """
-            <a href="${frontendUrl}">
-              <img src="${frontendUrl}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
-			badgeForm.titleBg.removePrefix(
-				"#"
-			)
-		}&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat}" alt="${encodedTitle}" />
-            </a>
-        """.trimIndent()
-
-		val badgeUrl = "${frontendUrl}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
-			badgeForm.titleBg.removePrefix("#")
-		}&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat}"
+			<a href="${frontendUrl}">
+			  <img src="$notionUrl" alt="${encodedTitle}" />
+			</a>
+		""".trimIndent()
 
 		val badgeInfo = BadgeInfo(
 			badgeUrl = badgeUrl,
+			notionUrl = notionUrl,
 			markdownCode = markdownCode,
 			htmlCode = htmlCode
 		)
@@ -77,32 +70,25 @@ class WebController(private val hitsService: FirestoreHitsService) {
 		// 배지 생성시 db에 등록
 		hitsService.ensureUrlExists(badgeForm.url)
 
+		val badgeUrl = "${frontendUrl}/api/count/preview?url=${encodedUrl}&title=${encodedTitle}&title_bg=${badgeForm.titleBg.removePrefix("#")}&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat}"
+
+		val notionUrl = "${frontendUrl}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${badgeForm.titleBg.removePrefix("#")}&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat}"
+
 		val markdownCode = """
-            [![Hits](${frontendUrl}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
-			badgeForm.titleBg.removePrefix(
-				"#"
-			)
-		}&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat})](${frontendUrl})
-        """.trimIndent()
+			[![Hits]($notionUrl)](${frontendUrl})
+		""".trimIndent()
 
 		val htmlCode = """
-            <a href="${frontendUrl}">
-              <img src="${frontendUrl}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
-			badgeForm.titleBg.removePrefix(
-				"#"
-			)
-		}&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat}" alt="${encodedTitle}" />
-            </a>
-        """.trimIndent()
-
-		val badgeUrl = "${frontendUrl}/api/count/increment?url=${encodedUrl}&title=${encodedTitle}&title_bg=${
-			badgeForm.titleBg.removePrefix("#")
-		}&count_bg=${badgeForm.countBg.removePrefix("#")}&edge_flat=${badgeForm.edgeFlat}"
+			<a href="${frontendUrl}">
+			  <img src="$notionUrl" alt="${encodedTitle}" />
+			</a>
+		""".trimIndent()
 
 		model.addAttribute("badgeForm", badgeForm)
 		model.addAttribute("markdownCode", markdownCode)
 		model.addAttribute("htmlCode", htmlCode)
 		model.addAttribute("badgeUrl", badgeUrl)
+		model.addAttribute("notionUrl", notionUrl)
 		model.addAttribute("showResult", true)
 
 		return "index"
@@ -118,6 +104,7 @@ class WebController(private val hitsService: FirestoreHitsService) {
 
 	data class BadgeInfo(
 		val badgeUrl: String,
+		val notionUrl: String,
 		val markdownCode: String,
 		val htmlCode: String
 	)
